@@ -1,0 +1,39 @@
+Entites:
+
+CardDto {
+    id: 123
+    group: { 
+        id: 2
+        color: red
+        name: java
+    }
+    content: null
+    toggleState: true
+}
+
+NoteDto {
+    id: 11
+    cardId: 123
+    content: "Hello world!"
+}
+
+------
+Api
+
+GET     cards                               -> CardDto[]
+POST    cards:                  (CardDto)   -> CardDto
+DELETE  cards/{id}                          -> Boolean
+PUT     cards/{id}:             (CardDto)   -> CardDto
+
+# change content for card with id 
+# create 'note' record and bind it with specific card 
+POST    cards/notes/{id}        (byte[])    -> CardDto
+PUT     cards/notes/{id}        (byte[])    -> CardDto
+#create draft note for card with id
+POST    cards/notes/draft/{id}  (byte[])    -> CardDto
+
+# set content for specific card with id from history
+POST    cards/history/{id}                  -> CardDto
+# get notes list for specific card with id sorted by timestamp
+GET     cards/history/{id}                  -> NoteDto[]
+
