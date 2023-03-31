@@ -1,4 +1,4 @@
-Entites:
+// Entites:
 
 CardDto {
     id: 123
@@ -7,7 +7,7 @@ CardDto {
         color: red
         name: java
     }
-    content: null
+    content: NoteDto
     toggleState: true
 }
 
@@ -18,7 +18,7 @@ NoteDto {
 }
 
 ------
-Api
+// Api
 
 GET     cards                               -> CardDto[]
 POST    cards:                  (CardDto)   -> CardDto
@@ -36,4 +36,3 @@ POST    cards/notes/draft/{id}  (byte[])    -> CardDto
 POST    cards/history/{id}                  -> CardDto
 # get notes list for specific card with id sorted by timestamp
 GET     cards/history/{id}                  -> NoteDto[]
-

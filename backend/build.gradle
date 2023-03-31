@@ -3,6 +3,8 @@ plugins {
 	id 'org.springframework.boot' version '3.0.5'
 	id 'io.spring.dependency-management' version '1.1.0'
 	id 'org.graalvm.buildtools.native' version '0.9.20'
+    id 'org.liquibase.gradle' version '2.1.1'
+    id 'nu.studer.jooq' version '8.1'
 }
 
 group = 'owpk'
@@ -24,13 +26,64 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jooq'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
-	implementation 'org.liquibase:liquibase-core'
+
+    implementation 'org.jooq:jooq-codegen:3.18.2'
+    implementation 'org.jooq:jooq-meta-extensions-liquibase:3.18.2'
+
+    liquibaseRuntime group: 'org.liquibase', name: 'liquibase-core', version: '3.5.1'
+    liquibaseRuntime 'org.liquibase:liquibase-groovy-dsl:3.0.0'
+    liquibaseRuntime 'info.picocli:picocli:4.6.1'
+    liquibaseRuntime 'org.postgresql:postgresql:42.3.6'
+    liquibaseRuntime group: 'org.yaml', name: 'snakeyaml', version: '1.30'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.3.6'
+
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+def jdbcUrl = 'jdbc:postgresql://localhost/sticky_notes'
+def dbUserName = 'postgres'
+def dbPassword = 'postgres'
+
+liquibase {
+    activities {
+        main {
+            classpath "${project.projectDir}/src/main/resources/liquibase"
+            changeLogFile "master.yaml"
+            url jdbcUrl
+            username dbUserName
+            password dbPassword
+        }
+    }
+}
+
+jooq {
+    configurations {
+        main {
+            generationTool {
+            generator {
+                database {
+                    name = "org.jooq.meta.extensions.liquibase.LiquibaseDatabase"
+                        
+                    properties {
+                        property {
+                            key = "rootPath"
+                            value = "${project.projectDir}/src/main/resources/liquibase"
+                        }
+
+                        property {
+                            key = "scripts"
+                            value = "master.xml"
+                        }
+                    }
+                }
+            }
+            }
+        }
+    }
 }
