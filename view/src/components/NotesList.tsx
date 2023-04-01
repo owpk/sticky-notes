@@ -1,5 +1,4 @@
-import { randomUUID } from 'crypto';
-import React, { FunctionComponent, useCallback, useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { Button, Form, Nav, NavDropdown, Stack } from 'react-bootstrap';
 import { Note, NoteProps } from './Note';
 import './NotesList.css';
@@ -20,6 +19,7 @@ export const NotesList: FunctionComponent<NotesListProps> = (props: NotesListPro
 
     const addNote = () => {
         props.addNoteCallback?.({
+            id: props.notes.length,
             text: ` aaa ${props.notes.length}`,
             title: '',
             open: true,

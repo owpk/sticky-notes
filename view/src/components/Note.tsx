@@ -11,7 +11,7 @@ export interface GroupProps {
 }
 
 export interface NoteProps {
-    id?: number;
+    id: number;
     title?: string;
     group?: GroupProps;
     openToGlobal?: boolean;

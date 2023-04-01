@@ -22,8 +22,10 @@
         "react-markdown": "7.0.0",
         "react-scripts": "5.0.1",
         "react-syntax-highlighter": "15.4.4",
+        "typed-rest-client": "^1.8.9",
         "typescript": "^4.9.5",
-        "web-vitals": "^2.1.4"
+        "web-vitals": "^2.1.4",
+        "zustand": "^4.3.7"
     },
     "scripts": {
         "start": "react-scripts start",
