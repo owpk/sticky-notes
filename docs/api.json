@@ -7,7 +7,7 @@ CardDto {
         color: red
         name: java
     }
-    content: NoteDto
+    content: "asd"
     toggleState: true
 }
 
