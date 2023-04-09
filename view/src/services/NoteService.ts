@@ -1,10 +1,18 @@
 import { CardDto } from '../rest/rest-types'
-import { addCard } from '../rest/RestClient'
+import { addCard, removeCard } from '../rest/RestClient'
 
 export const createNote = (content: string): CardDto => {
-    const cardData: CardDto = {
+    let cardData: CardDto = {
         toggleState: true,
         content: content,
     }
-    return addCard(cardData).then(r => r);
-}   
+    addCard(cardData).then((result) => (cardData = result))
+    if (cardData.id == null) throw new Error('Card id is null')
+    return cardData
+}
+
+export const removeNote = (id: number) => {
+    removeCard(id).then((resp) => {
+        if (!resp) throw new Error('Cannot delete note')
+    })
+}

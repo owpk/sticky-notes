@@ -1,5 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Button, Form, Nav, NavDropdown, Stack } from 'react-bootstrap';
+import { CardDto } from '../rest/rest-types';
+import { createNote, removeNote } from '../services/NoteService';
 import { Note, NoteProps } from './Note';
 import './NotesList.css';
 import { ToggleECButton } from './ToggleECButton';
@@ -18,11 +20,13 @@ export const NotesList: FunctionComponent<NotesListProps> = (props: NotesListPro
     };
 
     const addNote = () => {
+        const content = ''
+        const savedCard: CardDto = createNote(content)
         props.addNoteCallback?.({
-            id: props.notes.length,
-            text: ` aaa ${props.notes.length}`,
+            id: savedCard.id!,
+            text: content,
             title: '',
-            open: true,
+            open: savedCard.toggleState,
         });
     };
 
@@ -60,6 +64,7 @@ export const NotesList: FunctionComponent<NotesListProps> = (props: NotesListPro
                         group={note.group}
                         openToGlobal={parentExpandState}
                         removeCardCallback={(id: number) => {
+                            removeNote(id)
                             props.removeNoteCallback?.(id);
                         }}
                     />
