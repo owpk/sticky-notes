@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1652592839476-62
+      author: owpk
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: messages_types_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: created_at
+                  type: BIGINT
+              - column:
+                  name: updated_at
+                  type: BIGINT
+            tableName: messages_types

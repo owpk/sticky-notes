@@ -1,4 +1,4 @@
-Entites:
+// Entites:
 
 CardDto {
     id: 123
@@ -7,7 +7,7 @@ CardDto {
         color: red
         name: java
     }
-    content: null
+    content: "asd"
     toggleState: true
 }
 
@@ -17,8 +17,7 @@ NoteDto {
     content: "Hello world!"
 }
 
-------
-Api
+// Api
 
 GET     cards                               -> CardDto[]
 POST    cards:                  (CardDto)   -> CardDto

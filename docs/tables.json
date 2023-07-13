@@ -1,6 +1,6 @@
 card {
     id: long
-    group_id: long
+    group_id: long [ref: group.id]
     title: string
     toggle_state: boolean
 }
@@ -13,7 +13,7 @@ card_group {
 
 note {
     id: long
-    card_id: long
+    card_id: long [ref: card.id]
     content: string
     draft: boolean
 }

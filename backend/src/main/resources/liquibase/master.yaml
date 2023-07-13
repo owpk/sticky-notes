@@ -1,0 +1,6 @@
+databaseChangeLog:
+  - include:
+      file: init.yaml
+  - include:
+      file: db.changelog-1.0.yaml
+
