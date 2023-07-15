@@ -1,14 +1,34 @@
+Table users {
+    id bigint [primary key]
+    nick_name varchar(255)
+    email varchar(255)
+    password varchar(500)
+
+    indexes {
+      email [unique]
+    }
+}
+
+Table user_settings {
+    id bigint [primary key]
+    user_id bigint [ref: > users.id]
+    theme varchar(255)
+}
+
 Table cards {
-    id integer [primary key]
-    group_id integer [ref: < card_groups.id]
-    title string
+    id bigint [primary key]
+    user_id bigint [ref: > users.id]
+    group_id bigint [ref: > card_groups.id]
+    title varchar(50)
     toggle_state boolean
+    created_at bigint
+    updated_at bigint
 }
 
 Table card_groups {
-    id integer [primary key]
-    name string 
-    color enum
+    id bigint [primary key]
+    name varchar(50) 
+    color colors
     
     indexes {
       name [unique]
@@ -16,14 +36,17 @@ Table card_groups {
 }
 
 Table notes {
-    id integer [primary key]
-    card_id biginteger [ref: < cards.id] 
-    content string
+    id bigint [primary key]
+    card_id bigint [ref: > cards.id] 
+    content text
     draft boolean
+    timestamp bigint
 }
 
 enum colors {
     red 
     green 
-    etc
+    blue
+    yellow
 }
+
