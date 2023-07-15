@@ -1,0 +1,6 @@
+[submodule "sticky-notes-backend"]
+	path = sticky-notes-backend
+	url = git@github.com:owpk/sticky-notes-backend.git
+[submodule "sticky-notes-webapp"]
+	path = sticky-notes-webapp
+	url = git@github.com:owpk/sticky-notes-webapp.git
