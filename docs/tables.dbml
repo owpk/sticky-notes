@@ -1,0 +1,29 @@
+Table cards {
+    id integer [primary key]
+    group_id integer [ref: < card_groups.id]
+    title string
+    toggle_state boolean
+}
+
+Table card_groups {
+    id integer [primary key]
+    name string 
+    color enum
+    
+    indexes {
+      name [unique]
+    }
+}
+
+Table notes {
+    id integer [primary key]
+    card_id biginteger [ref: < cards.id] 
+    content string
+    draft boolean
+}
+
+enum colors {
+    red 
+    green 
+    etc
+}
